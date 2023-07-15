@@ -1,0 +1,1167 @@
+Module 3: ARRAYS & STRINGS
+----------------------------------------------------------
+/* Assume a hall with the capability of n seats and every occupied seat is represented with 1 and the empty seat with 0. 
+Rahul was asked to code the program to count the total number of occupied and empty seats.
+Test cases:
+------------------------------------------------------------------------------------------
+Test case 1:
+12
+100101001110
+output= Occupied Seats = 6 
+Empty Seats = 6
+
+Test case 2
+10
+1111111111
+output= Occupied Seats = 10
+Empty Seats = 0
+
+Test case 3
+20
+00000000000000000010
+output= Occupied Seats = 1 
+Empty Seats = 19
+*/
+//write the program from next line 
+#include<stdio.h>
+int main()
+{
+    int n,c1=0;
+    scanf("%d",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+         scanf("%d",&a[i]);
+         if(a[i]==1)
+             c1++;
+         
+    }
+    printf("Occupied Seats = %d \nEmpty Seats =%d",c1,n-c1);
+}
+2. Find similar elements in Array and print
+---------------------------
+/* If an array arr contains n elements, then write a program to check if arr[ 0 ] = arr[ n-1 ], arr[ 1 ] = arr[ n - 2 ] and so on.
+Test cases:
+-----------------------------------------------------------------------
+case=t1
+input=6
+22
+32
+42
+52
+32
+22
+output=
+a[0] & a[5] are equal
+a[1] & a[4] are equal
+a[2] & a[3] are not equal
+
+
+case=t2
+input=4
+6
+8
+3
+2
+output=
+a[0] & a[3] are not equal
+a[1] & a[2] are not equal
+*/
+//write the program from next line 
+------------------------------------------------------------------------------
+# include<stdio.h>
+int main()
+{
+    int n,i,j;
+    scanf("%d",&n);
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(i=0,j=n-1;i<j;i++,j--)
+    {
+        if(a[i]==a[j])
+            printf("a[%d] & a[%d] are equal\n",i,j);
+        else
+          printf("a[%d & a[%d] are not equal\n",i,j);
+    }
+    return(0);
+}
+3. Smallest and Tallest Student in a class
+-----------------------------------------------------
+/* In a class there are n no. of students.one day the sprts teacher measured height of all of them 
+and he wants to know the student with minimum height and Maximum height. Help the sports teacher 
+to find the minimum and maximum height student in the class.
+
+Test cases:
+----------------------------------------------------------------
+case=t1
+input=madam
+output=palindrome
+
+case=t2
+input=abcd
+output=not a palindrome
+
+case=t3
+input=121
+output=palindrome
+
+case=t4
+input=&%*&
+output=invalid data
+
+*/
+//write the program from next line 
+# include<stdio.h>
+int main()
+{
+    int n,i,min=200,max=0;
+    scanf("%d",&n);
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        if(a[i]>max)
+             max=a[i];
+        if(a[i]<min)
+             min=a[i];
+    }
+    printf("Height of smallest student in class =%d cms\n",min);
+    printf("Height of Tallest student in class =%d cms",max);
+    return(0);
+}
+4. Loot Houses
+--------------------------------------------------------------------
+/*There are n houses built in a line, each of which contains some cash in it.
+A thief is going to steal the maximal cash of these houses,
+but he can't steal in two adjacent houses because the owner of the stolen houses will tell his two neighbours left and right side.
+Find the maximum stolen value?
+Input format:
+-----------------
+First an integer n, denoting how many houses are there.
+Then n space separated integers denoting the cash for the n houses.
+Output Format:
+An integer denoting the maximum value possible to steal. 
+
+Test cases:
+--------------------------------------------------------
+case=t1
+input=6
+10 20 50 50 100 200
+output=270
+
+case=t2
+input=7
+0 2 1 5 3 6 1
+output=13
+
+//Start writing your program from next line
+#include<stdio.h> 
+int main()
+{
+    int n,i,sumE=0,sumOdd=0;
+    scanf("%d",&n);
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        if(i%2==0)
+        {
+            sumE=sumE+a[i];
+        }
+        else
+        {
+            sumOdd=sumOdd+a[i];
+        }
+    }
+    if(sumE>sumOdd)
+       printf("%d",sumE);
+    else
+       printf("%d",sumOdd);
+       
+return 0;       
+}
+5. Palindrome
+-------------------------------------------------------------------------
+/*Write a c program to check whether a given string is palindrome or not
+
+test case example:
+input= madam
+output=palindrome
+
+test case example:
+input= 121
+output=palindrome
+
+test case example:
+input=&%^&
+output=invalid data
+*/
+
+//Start writing program from next line
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+int main()
+{
+    char s[101],i,j,f=0;
+     scanf("%s",s);
+     //fgets(s,sizeof(s),stdin);
+     //s[strcspn(s,"\n")]='\0';
+     int n=strlen(s);
+     for(i=0,j=n-1;i<j;i++,j--)
+     {  
+         if(isalnum(s[i]))
+        {
+           if(s[i]==s[j])
+              continue;
+           else
+           {
+               f=1;
+               break;
+           }     
+        }
+        else
+        {
+            printf("Invalid data");
+            
+            return 0;
+        }   
+        
+     }
+     if(f==0)
+          printf("palindrome");
+        else
+          printf("Not a Palindrome");
+    return 0;
+}
+6.Absolute difference of two diagonals of a Square Matrix
+----------------------------------------------------------------------
+/*Given a square matrix, calculate the absolute difference between the sums of its diagonals.
+first input requires size of matrix and user will provide matrice elements.
+For example, the square matrix arr is shown below:
+3
+
+1 2 3
+4 5 6
+9 8 9 
+
+The left-to-right diagonal = 1 + 5 + 9 = 15. The right to left diagonal = 3 + 5 + 9 = 17. 
+Their absolute difference is |15-17| = 2
+Testcases:
+--------------------------------------------------------------------------------
+case=t1
+input=3
+4 5 6
+12 14 20
+16 19 21
+output=Absolute difference of Left and Right diagonal is |39-36| = 3
+
+case=t2
+input= 4
+1 0 1 1
+0 1 1 0
+0 0 1 1
+1 0 0 1
+output= Absolute difference of Left and Right diagonal is |4-3| = 1 
+
+case=t3
+input=5
+1 3 4 5 12
+0 1 -23 -15 19
+12 16 25 37 91
+3 4 5 6 7
+15 29 51 39 6
+output=Absolute difference of Left and Right diagonal is |39-41| = 2
+*/
+
+//Start writing program from next line
+-----------------------------------------------------------
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+int main()
+{
+ int i,j,n;
+ int  sumLR=0, sumRL=0;
+
+ scanf("%d", &n);
+ int a[n][n];
+ for(i=0;i< n;i++)
+ {
+  for(j=0;j< n;j++)
+  {
+   //printf("a[%d][%d]=",i,j);
+   scanf("%d", &a[i][j]);
+  }
+ }
+ for(i=0;i< n;i++)
+ {
+  for(j=0;j< n;j++)
+  {
+   
+   if(i==j)
+   {
+    sumLR = sumLR + a[i][j];
+
+   }
+   if(i+j==n-1)
+   {
+    sumRL = sumRL + a[i][j];
+
+   }
+  }
+ }
+ printf("Absolute difference of Left and Right diagonal is |%d - %d|  = %d\n",sumLR,sumRL, abs(sumLR-sumRL));
+
+ return 0;
+}
+7. Printing Lower triangular matrix
+-------------------------------------------------------------------------
+/*Given a two dimensional array, Write a program to print lower triangular matrix for 3 by 3 matrix. 
+
+Lower triangular matrix is a matrix which contains elements below principal diagonal including principal diagonal elements 
+and rest of the elements are 0.
+
+Test cases:
+------------------------------------------------
+case=t1
+input=4 5 2 0 6 3 9 7 8
+output=The matrix is:
+4 5 2
+0 6 3
+9 7 8
+The lower triangular matrix is:
+4 0 0
+0 6 0
+9 7 8
+
+case=t2
+input = 1 1 1 1 1 1 1 1 1 
+output=The matrix is:
+1 1 1
+1 1 1
+1 1 1
+The lower triangular matrix is:
+1 0 0
+1 1 0
+1 1 1
+*/
+
+
+//Start writing your program from next line
+
+#include <stdio.h>
+
+void main()
+   {
+  int i,j,n;
+  int arr1[3][3];
+	   for(i=0;i<3;i++)
+        {
+            for(j=0;j<3;j++)
+            {
+	           scanf("%d",&arr1[i][j]);
+            }
+        }  
+	 printf("The matrix is :\n");
+	 for(i=0;i<3;i++)
+	 {
+	   for(j=0;j<3 ;j++)
+	     printf("%d ",arr1[i][j]);
+	    printf("\n");
+	 }
+     printf("The lower triangular matrix is :\n");
+    for(i=0;i<3;i++){
+      
+      for(j=0;j<3;j++)
+           if(i<j)
+               printf("%d ",0);
+             
+           else
+              printf("%d ",arr1[i][j]);
+        printf("\n");    
+  }
+     
+}
+           
+8.Frequency of an element in the given text data.
+----------------------------------------------------------------------------------------------------------
+/*Given a Text data say  S containing all lowercase English characters, the task is to find the frequency of all the characters in the Text data.
+constraint:Should not allow spaces
+example 
+input:ramisrood
+output:Frequency of each element in given Text data is:
+a=1
+d=1
+i=1
+m=1
+o=2
+s=1
+r=2
+testcases:
+----------------------------------------
+case=t1
+input=kingisback
+output=Frequency of each element in given Text data is:
+a=1
+b=1
+c=1
+g=1
+i=2
+k=2
+n=1
+s=1
+
+case=t2
+input=nicetoseeyou
+output=Frequency of each element in given Text data is:
+c=1
+e=3
+i=1
+n=1
+o=2
+s=1
+t=1
+u=1
+y=1
+
+*/
+//Start writing your program from next line
+#include <stdio.h>
+#include <string.h>
+void printFrequency(int freq[])
+{
+    printf("Frequency of each element in given Text data is:");
+	for (int i = 0; i < 26; i++)
+	{
+		
+		if (freq[i] != 0)
+		{
+			
+			printf("%c=%d\n",
+				i + 'a', freq[i]);
+		}
+	}
+}
+void findFrequncy(char S[])
+{
+	int i = 0;
+
+	int freq[26] = { 0 };
+
+	
+	while (S[i] != '\0') {
+
+	/*	if((freq[S[i]-'A']++)==freq[S[i]])
+		{
+		printf("enter smallcase\n ");
+		break;
+		}
+		else
+		{ */
+		freq[S[i] - 'a']++;
+
+		
+		i++;
+		//}
+	}
+
+	
+	printFrequency(freq);
+}
+
+
+int main()
+{
+	char S[100];
+	scanf("%s",S);
+	findFrequncy(S);
+}
+9. Fun with camelCase for a given normal string
+------------------------------------------------------------------------------------------------------------------------
+/*Given a sentence, task is to remove spaces from the sentence and rewrite in Camel case. 
+It is a style of writing where we don’t have spaces and all words begin with capital letters.
+
+Test case example:
+Examples: 
+
+Input  : I got intern at microsoft
+Output : IGotInternAtMicrosoft
+
+Input :  Here comes the garden
+Output : HereComesTheGarden
+testcases:
+---------------------------------------------------------------------------------------------------
+case=t1
+input=i am faster than super computer
+output=IAmFasterThanSuperComputer
+
+
+case=t2
+input=who am i
+output=WhoAmI
+
+
+case=t3
+input= you are soo crazy
+output=YouAreSooCrazy/*Write a program to delete all vowels from a sentence. Assume that
+the sentence is not more than 80 characters long. If its more than 80 then the program should
+convert first 80 characters and print.
+
+Test cases:
+input=arunkongi
+Sentence after removing vowels:
+output=rnkng
+
+*/
+
+
+//Start writing your program from next line
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 81
+
+int main() 
+{
+    char sentence[MAX_LENGTH];
+
+   // printf("Enter a sentence (up to 80 characters):\n");
+    fgets(sentence, MAX_LENGTH, stdin);
+
+    int length = strlen(sentence);
+
+    for (int i = 0; i < length; i++) 
+    {
+        char c = tolower(sentence[i]);
+
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') 
+        {
+            for (int j = i; j < length; j++) 
+            {
+                sentence[j] = sentence[j + 1];
+            }
+            
+            length--;
+            i--;
+        }
+    }
+
+    printf("Sentence after removing vowels:\n%s", sentence);
+
+    return 0;
+}
+
+
+10. Print the sentence by removing all vowels
+--------------------------------------------------------------
+
+/*Write a program to delete all vowels from a sentence. Assume that
+the sentence is not more than 80 characters long. If its more than 80 then the program should
+convert first 80 characters and print.
+
+case=t1
+input=arunkongi
+output="Sentence after removing vowels:
+rnkng"
+
+case=t2
+Fail message="Test case didnt match"
+input=Apart from the sheer complexity of the content, the lines of the poems often appear to have no relationship to one another.
+output="Sentence after removing vowels:
+prt frm th shr cmplxty f th cntnt, th lns f th pms ftn pp"
+
+case=t3
+input=The earth is considered as one of the most beautiful planets in the universe. It is the only planet in our galaxy that has enough water to support life. Unfortunately our planet is suffering due to many problems which should be solved before it is too late. The major problems that are facing our world today are population, pollution and animal extinction. One of the problems facing our world is population. It began about ten thousand years ago when the humans settled and began farming. The farming provides more food for the people thus making the population grow. Now we are about 6 billion in population and in a few years we will be around 10 to 11 billion.
+output=Sentence after removing vowels:
+Th rth s cnsdrd s n f th mst btfl plnts n th nvrs. t
+
+
+*/
+
+
+//Start writing your program from next line
+-------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 81
+
+int main() 
+{
+    char sentence[MAX_LENGTH];
+
+   // printf("Enter a sentence (up to 80 characters):\n");
+    fgets(sentence, MAX_LENGTH, stdin);
+
+    int length = strlen(sentence);
+
+    for (int i = 0; i < length; i++) 
+    {
+        char c = tolower(sentence[i]);
+
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') 
+        {
+            for (int j = i; j < length; j++) 
+            {
+                sentence[j] = sentence[j + 1];
+            }
+            
+            length--;
+            i--;
+        }
+    }
+
+    printf("Sentence after removing vowels:\n%s", sentence);
+
+    return 0;
+}
+11."zig zag" in reversing a sentence
+---------------------------------------------------------------------------
+/*Reverse a Sentence Using Recursion
+Test case example:
+Ecase=t1
+input=margorp emosewa
+output=awesome program
+
+
+case=t2
+input=ohw ma i
+output=i am who
+
+
+case=t3
+input=space  space
+output=ecaps  ecaps
+
+case=t4
+Input= i tog nretni ta tfosorcim
+Output= microsoft at intern got i
+
+case=t5
+Input= ereh semoc eht nedrag
+Output= garden the comes here
+
+*/
+
+//Start writing your program from next line
+------------------------------------------------------------------
+#include <stdio.h>
+void reverseSentence();
+int main() {
+    //printf("Enter a sentence: ");
+    reverseSentence();
+    return 0;
+}
+
+void reverseSentence() {
+    char c;
+    scanf("%c", &c);
+    if (c != '\n') {
+        reverseSentence();
+        printf("%c", c);
+    }
+}
+12. Working with strings is fun
+--------------------------------------------------------------------
+/*Write a program that extracts part of the given string from the specified position. For example if the string is VIRAT KOHLI
+then from position 2, extracting 4 characters would return the string as "IRAT".
+
+
+CONDITIONS:
+1. If the position is greater than the string length, zero or less than zero then the program should display " Can not extract substring"
+2. If the number of characters to be extracted is zero or greater than the string length then the program should extract entire string from the specified position.
+3. String size is maximum 100 characters.
+4. Maximum execution time for the given question is 32 seconds. If your code exceeds that test case wont match.
+
+Input Format: Read a string with spaces 
+In the next line read the position from which the string to be extracted and number of characters to be extracted from given position.
+
+
+Test cases:
+-------------------------------------------------------------------------------------
+case=t1
+input=VIRAT KOHLI
+2 4
+Output=IRAT
+
+case=t2
+Fail message="test case didn't match"
+input=VIRAT KOHLI
+2 0
+Output=IRAT KOHLI
+
+case=t3
+input=arsenal gunners
+6 4
+output=al g
+
+case =t4
+Fail message="test case didn't match"
+input=virat kohli
+-5 -5
+output=Can not extract substring
+
+case=t5
+input=griet college c programming
+20 4
+output=gram
+
+case=t6
+input=arun
+2 10
+output=run
+
+case=t7
+input=arun kongi
+25 5
+output=Can not extract substring
+
+case=t8
+input=arun
+2 0
+output=run
+
+case=t9
+input=virat kohli
+2 3
+output=ira
+
+case=t10
+input=arun kongi
+1 1
+output=a
+
+case=t11
+input=The earth is considered as one of the most beautiful planets in the universe. It is the only planet in our galaxy that has enough water to support life.
+output=string length exceeds 100 chracters//Start writing your program from next line
+
+#include <stdio.h>
+#include <string.h>
+
+void substring(char str[], int pos, int num) 
+{
+    int length = strlen(str);
+
+   if (pos <= 0 || pos>length|| num < 0)
+    {
+        printf("Can not extract substring");
+        return;
+    }
+         pos--;
+    if (num > (length - pos))
+        num = length - pos;
+ 
+  
+    if (num == 0)
+        num = length - pos;
+        
+    char extracted[101];
+    int i, j = 0;
+    
+  for (i = pos; i < (pos+ num); i++)
+  {
+        extracted[j] = str[i];
+        j++;
+    }
+    extracted[j] = '\0';
+
+    printf("%s", extracted);
+}
+
+int main() 
+{
+    char str[1000];
+    int pos, num;
+
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';
+    int length=strlen(str);
+     
+     if(length>100)
+    {
+      printf("string length exceeds 100 chracters");
+      return 0;
+    }
+
+    scanf("%d", &pos);
+    scanf("%d", &num);
+
+    substring(str, pos, num);
+
+    return 0;
+}
+13. Converts a string like "124" to an integer -123.
+/*Write a  c program that converts a string like "124" to an integer 124.
+
+Test cases:
+case=t1
+input=50
+output=
+Number : -49
+
+case=t1
+input=35
+output=
+Number : -34
+
+input=50
+output=
+Number : -49
+
+*/
+
+
+//Start writing your program from next line
+-------------------------------------------------------
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char str[100];
+	int i, num, fin = 0;
+	printf("Enter a string of numbers : ");
+	//gets(str);
+	scanf("%s",str);
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		num = str[i] - 48;
+		fin = fin * 10 + num;
+	}
+	printf("\nNumber : %d", ~(fin-2));
+	
+	return 0;
+}
+14.Game of Tetris
+---------------------------------------------
+/*Arwin and Suhas likes to play the game of Tetris. To decide who is better in playing the Tetris game. Arwin and 
+Suhas comes up to a decision that they must have a series of N games. And for the ith game Arwin and Suhas 
+scores a[i] and s[i] respectively. And the winner is decided by total of the scores in all the games. That means if 
+total of the games of Arwin is greater than total of the games of Suhas, print “Arwin Wins”. Otherwise, print 
+“Suhas Wins”.
+NOTE: If both ends up with same total scores print “Draw”
+Input Format:
+• The first line contains N 
+• The second line contains N space separated integers which represent a[i]
+• The third line contains N Space Separated integers which represent s[i]
+Output Format:
+• A single line which displays “Arwin Wins”, “Suhas Wins” or “Draw” depending upon the result.
+
+
+test cases:
+case=t1
+input=5
+7 5 6 8 11
+8 11 6 5 7 
+Output=Draw
+
+case=t2
+input=3
+10 3 8
+3 2 1
+output=Arwin wins
+
+case=t3
+Fail message="Hidden test case"
+input=4
+5 6 2 1
+7 3 5 8
+output=Suhas Wins
+*/
+
+
+//Start writing your program from next line
+
+-------------------------------------------------------------------
+
+#include<stdio.h>
+int main()
+{
+    int n,sumA=0,sumS=0,i;
+    scanf("%d",&n);
+    int a[n],s[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        sumA=sumA+a[i];
+    }
+     for(i=0;i<n;i++)
+    {
+        scanf("%d",&s[i]);
+        sumS=sumS+s[i];
+    }
+    if(sumA==sumS)
+        printf("Draw");
+    else if(sumA>sumS)
+        printf("Arwin wins");
+    else
+        printf("Suhas Wins");
+        
+  return 0;    
+}
+15. Square Free Number
+----------------------------------------------------
+/* 
+If no prime factor divides a number more than once, it is said to be Square-Free; that is, the maximum power of a prime factor that divides n is one.
+1, 2, 3, 5, 6, 7, 11, 13, 14, 15, 17, 19 etc.. are some square-free numbers.
+Write a C program to print first 10 square free numbers.
+Testcases:
+------------------------------------
+case=t1
+input= 10
+output=1 2 3 5 6 7 10 11 13 14
+*/
+//Start writing program from next line
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isSquareFree(int num)
+{
+    for (int i = 2; i * i <= num; i++) 
+    {
+        if (num % (i * i) == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int count = 0;
+    int num = 1;
+
+    //printf("First 10 square-free numbers:\n");
+
+    while (count < 10)
+    {
+        if (isSquareFree(num)) 
+        {
+            printf("%d ", num);
+            count++;
+        }
+        num++;
+    }
+
+    printf("\n");
+
+    return 0;
+}
+16. Consecutive prime Numbers
+/* 
+Some prime numbers can be expressed as a sum of other consecutive prime numbers. 
+For example: 
+5 = 2 + 3
+17 = 2 + 3 + 5 + 7
+ 
+Your task is to find out how many prime numbers which satisfy above property are present in the range 3 to N 
+subject to a constraint that summation should always start with number 2.
+
+Input Format: First line contains a number N
+Output Format: Print all such numbers separated by space.
+
+Test cases:
+------------------------------------------------------------
+case=t1
+input= 100
+output=5 17 41
+
+case=t2
+input=200
+output=5 17 41 197
+
+*/
+//Start writing program from next line
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isPrime(int num)
+{
+    if (num <= 1) {
+        return false;
+    }
+
+    for (int i = 2; i * i <= num; i++) 
+    {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void printPrimeNumbers() 
+{
+    int limit = 200;
+    for (int num = 5; num <= limit; num++) 
+    {
+        if (isPrime(num))
+        {
+            int sum = 2;
+            int current = 3;
+
+            while (current < num) 
+            {
+                if (isPrime(current))
+                {
+                    sum += current;
+                    if (sum == num)
+                    {
+                        printf("%d ", num);
+                        break;
+                    }
+                }
+
+                current += 2;
+            }
+        }
+    }
+}
+
+int main() {
+    printPrimeNumbers();
+
+    return 0;
+}
+17. GRACE MARKS
+------------------------------------------------------------------------
+/* 
+Write a program to find the grace marks for a student using switch.The user should enter the class obtained by the student and the
+number of subjects he has failed in. Use the following logic:
+
+If the student gets 1st class and the number of subjects he failed in is greater than 3, then print not eligible for grace marks. Otherwise print eligible for 5 grace marks per subject.
+If the student gets 2nd class and the number of subjects he failed in is greater than 2, then print not eligible for grace marks. Otherwise print eligible for 4 grace marks per subject.
+If the student gets 3rd class and the number of subjects he failed in is greater than 1, then print not eligible for grace marks. Otherwise print eligible for 3 grace marks per subject.
+
+Input format: student need to enter the class obtained (1 or 2 or 3) and number of subjects failed.
+If student enter any other choice apart the given classes print error message as "Wrong choice. Please enter valid class"
+
+Test cases:
+------------------------------------------------------------------------------------------
+case=t1
+input=2 2
+output=eligible for 4 grace marks per subject
+
+case=t1
+input=3 2
+output=not eligible for grace marks
+
+case=t3
+input=5 1
+output=Wrong choice. Please enter valid class
+
+case=t4
+input=3 1
+output=eligible for 3 grace marks per subject
+
+case=t5
+input=1 2
+output=eligible for 5 grace marks per subject
+*/
+//Start writing program from next line
+#include<stdio.h>
+      int main()
+      {
+        int class,fail;
+        //printf("Enter the class = ");
+        scanf("%d",&class);
+        //printf("Enter the number of subjects student got failed = ");
+        scanf("%d",&fail);
+        switch(class)
+        {
+          case 1:
+            switch(fail)
+            {
+              case 0:
+              case 1:
+              case 2:
+              case 3:
+                printf("eligible for 5 grace marks per subject");
+                break;
+               default:
+               printf("not eligible for grace marks");
+               break;
+             }
+             break;
+           case 2:
+             switch(fail)
+             {
+               case 0:
+               case 1:
+               case 2:
+          printf("eligible for 4 grace marks per subject");
+               break;
+               default:
+            printf("not eligible for grace marks");
+               break;
+              }
+              break;
+           case 3:
+              switch(fail)
+              {
+               case 0:
+               case 1:
+           printf("eligible for 3 grace marks per subject");
+               break;
+               default:
+              printf("not eligible for grace marks");
+               break;
+               }
+               break;
+               default:
+               printf("Wrong choice. Please enter valid class");
+               break;
+              }  
+              return 0;
+              }
+
+18. Combinations of 1,2,3
+---------------------------------------------------------------------
+/* 
+Write a program to generate all combinations of 1, 2 and 3 using forloop.
+Testcase example:
+case=t1
+input=45
+output=Wierd
+
+case=t2
+input=72
+output=Not Wierd
+
+case=t3
+input=4 
+output=Not Wierd
+
+*/
+//Start writing program from next line
+#include<stdio.h>
+
+   int main()
+   {
+int i,j,k;
+for(i=1;i<=3;i++)
+{
+	for(j=1;j<=3;j++)
+	{
+		for(k=1;k<=3;k++)
+		{
+			if(i==j || i==k || j==k)
+				continue;
+			//printf("%d, ", i*100+j*10+k);
+			  printf("%d%d%d ", i, j, k);
+		}
+	}
+}
+printf("are the all possible combinations of 1,2 and 3.");
+return 0;
+ }
+19. Placing a number in appropriate Category
+-----------------------------------------------------------------------------------
+
+
