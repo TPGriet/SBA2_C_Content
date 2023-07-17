@@ -1,0 +1,820 @@
+Module 5: Preprocessors, Structures and Files
+-----------------------------------------------------------------------------------
+1. Student Details
+--------------------------------
+/* Create a structure to specify data on students given below:
+Roll number, Name, Department, Course, Year of joining
+Assume that there are not more than 50 students in the college.
+(1) Write a function to print names of all students who joined in a
+particular year.
+(2) Write a function to print the data of a student whose roll
+number is received by the function.
+Test cases:
+ccase=t1
+input=2014
+53
+output=Year of joining : 2014
+Roll No:3
+Name:Kishor
+Department:IT
+Course: B.tech
+
+Roll No:10
+Name:Mohammad Siraj Alam
+Department:Computer Science
+Course: B.tech
+
+Roll No:2
+Name:Ramesh
+Department:IT
+Course: B.tech
+
+Roll No:53
+Name:Deepak
+Department:Computer Applications
+Course:BCA
+Year of joining:2013
+
+case=t2
+input=2012
+13
+output=Year of joining:2012
+Roll No:1
+Name:Aakash
+Department:Tool and Die
+Course:Diploma
+
+Roll No:13
+Name:Karan
+Department:Mechanical
+Course:Diploma
+Year of joining:2013
+
+case=t3
+input=2013
+1
+output=Year of joining:2013
+Roll No:53
+Name:Deepak
+Department:Computer Applications
+Course:BCA
+
+Roll No:13
+Name:Karan
+Department:Mechanical
+Course:Diploma
+
+Roll No:1
+Name:Aakash
+Department:Tool and Die
+Course:Diploma
+Year of joining:2012
+
+*/
+//write a program for next line
+#include<stdio.h>
+struct studata
+{
+int roll;
+char name[50];
+char depart[50];
+char course[20];
+int yoj;
+}nos[10] = { 03, "Kishor", "IT", "B.tech", 2014,
+10, "Mohammad Siraj Alam", "Computer Science", "B.Tech", 2014,
+53, "Deepak", "Computer Applications", "BCA", 2013,
+13, "Karan", "Mechanical", "Diploma", 2013,
+1, "Aakash", "Tool and Die", "Diploma", 2012,
+2, "Ramesh", "IT", "B.tech", 2014
+};
+void student_in_year(int year)
+{
+int i;
+printf("Year of joining:%d", year);
+for (i = 0; i <10; i++)
+{
+	if (nos[i].yoj == year)
+	{
+
+		printf("\nRoll No:%d", nos[i].roll);
+		printf("\nName:%s", nos[i].name);
+		printf("\nDepartment:%s", nos[i].depart);
+		printf("\nCourse:%s\n", nos[i].course);
+	}
+}
+}
+void student_data(int enroll)
+{
+int i;
+printf("\nRoll No:%d", enroll);
+for (i = 0; i <=10; i++)
+{
+	if (nos[i].roll == enroll)
+	{
+		printf("\nName:%s", nos[i].name);
+		printf("\nDepartment:%s", nos[i].depart);
+		printf("\nCourse:%s", nos[i].course);
+		printf("\nYear of joining:%d\n", nos[i].yoj);
+	}
+}
+}
+int main()
+{
+int yoj, roll;
+scanf("%d", &yoj);
+student_in_year(yoj);
+scanf("%d", &roll);
+student_data(roll);
+return 0;
+}
+2. Transaction details of a customer
+------------------------------------------------
+/* Create a structure to specify data of customers in a bank. The data to be stored is: Account number, Name, Balance in account.
+Assume maximum of 20 customers in the bank.
+(1) Write a function to print the Account number and name of each customer with balance below Rs. 100.
+(2) If a customer requests for withdrawal or deposit, the form contains the fields:
+Acct. no, amount, code (1 for deposit, 0 for withdrawal)
+Write a program to give a message, “The balance is insufficient for the specified withdrawal”, if on withdrawal the balance falls
+below Rs. 100.
+
+Test cases:
+---------------------------------------------------------------------------------
+case=t1
+input=4
+1
+100
+output=Your new account balance is : 133
+
+Details of Accounts having balance<100 :
+
+Name : Deepak
+Account Number : 3
+
+case=t2
+input=2
+0
+1200000
+
+output=Your new account balance is : 33044
+
+Details of Accounts having balance<100 :
+
+Name : Deepak
+Account Number : 3
+
+
+Name : Rihan
+Account Number : 4
+
+case=t3
+input=3
+0
+50
+
+output=The balance is insufficient for the specified withdrawal
+
+Details of Accounts having balance<100 :
+
+Name : Deepak
+Account Number : 3
+
+
+Name : Rihan
+Account Number : 4
+
+*/
+//write a program for next line
+
+#include<stdio.h>
+
+/*Function to perform withdrawal or deposition*/
+void action(int, int, int);
+
+/*Print the balance below 100 Rs.*/
+void below100();
+
+struct acc_holder
+{
+long int acc_num;
+char name[30];
+int bal;
+} sbi[10] = { 1, "Siraj", 1000000,
+2, "Azad", 1233044,
+3, "Deepak", 99,
+4, "Rihan", 33,
+5, "Rahul Khowal", 200000
+};
+
+int main()
+{
+int accnum, amount, code;
+scanf("%d", &accnum);
+scanf("%d", &code);
+scanf("%d", &amount);
+
+action(accnum, amount, code);
+
+below100();
+
+return 0;
+}
+
+void below100()
+{
+int i;
+printf("\n\nDetails of Accounts having balance<100 :\n");
+for (i = 0; i < 10; i++)
+{
+	if (sbi[i].bal < 100 && sbi[i].bal > 0)
+	{
+		printf("\nName : %s", sbi[i].name);
+		printf("\nAccount Number : %ld\n\n", sbi[i].acc_num);
+	}
+}
+}
+
+void action(int accnum, int amount, int code)
+{
+int i;
+for (i = 0; i < 50; i++)
+{
+	if (sbi[i].acc_num == accnum)
+		break;
+}
+if (!code)
+{
+	if (sbi[i].bal - amount < 100)
+	{
+		printf("\nThe balance is insufficient for the specified withdrawal");
+		return;
+	}
+	else
+	{
+		sbi[i].bal -= amount;
+		printf("\nYour new account balance is : %d", sbi[i].bal);
+	}
+}
+else
+{
+	sbi[i].bal += amount;
+	printf("\nYour new account balance is : %d", sbi[i].bal);
+}
+
+}
+3. Arranging Cricketer Details based on his Average runs
+---------------------------------------------------------------------------------------------
+/* A record contains name of cricketer, his age, number of test matches that he has played and the average runs that he has scored
+in each test match. Create an array of structures to hold records of 20 such cricketers and then write a program to read these records
+and arrange them in ascending order by average runs. Use the qsort( ) standard library function.
+
+Test cases:
+ccase=t1
+input=
+68 kohli 200
+56 dhoni 250
+48 rohit 150
+output=
+Name: rohit
+Total Matches played: 150
+Average Runs: 48
+
+Name: dhoni
+Total Matches played: 250
+Average Runs: 56
+
+Name: kohli
+Total Matches played: 200
+Average Runs: 68
+
+case=t2
+input=48 yuvraj 180
+35 gill 50
+45 sky 100
+output=
+Name: gill
+Total Matches played: 50
+Average Runs: 35
+
+Name: sky
+Total Matches played: 100
+Average Runs: 45
+
+Name: yuvraj
+Total Matches played: 180
+Average Runs: 48
+
+case=t3
+fail message="hidden case"
+input=50 yuvraj 180
+45 gill 50
+45 sky 100
+output=
+Name: gill
+Total Matches played: 50
+Average Runs: 45
+
+Name: sky
+Total Matches played: 100
+Average Runs: 45
+
+Name: yuvraj
+Total Matches played: 180
+Average Runs: 50
+
+
+
+*/
+//write a program for next line
+
+#include<stdio.h>
+#include<stdlib.h>
+#define Max 3
+
+int compare(const void * a, const void * b);
+
+struct cricketers
+{
+int avgruns;
+char name[30];
+int totmatches;
+
+}india[Max];
+
+int main()
+{
+    int i;
+    for(i=0;i<Max;i++)
+    {
+        scanf("%d%s%d",&india[i].avgruns,india[i].name,&india[i].totmatches);
+    }
+
+qsort(india, Max, sizeof(struct cricketers), compare);
+
+for (i = 0; i < Max; i++)
+{
+	printf("Name: %s", india[i].name);
+	printf("\nTotal Matches played: %d", india[i].totmatches);
+	printf("\nAverage Runs: %d\n\n", india[i].avgruns);
+}
+return 0;
+}
+
+int compare(const void * a, const void * b)
+{
+return (*(int*)a - *(int*)b);
+}
+4. Display employee details based on year of joining
+------------------------------------------------------------
+/* There is a structure called employee that holds information like employee code, name and date of joining. Write a program to
+create an array of structures and enter some data into it. Then ask the user to enter current date. Display the names of those
+employees whose tenure is greater than equal to 3 years.
+Test cases:
+case=t1
+input=30 6 2023                                 
+output=                                                                                
+Employees with greater than or equal to 3 years of tenure                       
+                                                                                
+                                                                                
+Code : 1                                                                        
+Name : Shahnawaz                                                                
+Date of joining : 13-1-2006                                                     
+                                                                                
+Code : 4                                                                        
+Name : Amit Puri                                                                
+Date of joining : 21-6-2008                                                     
+                                                                                
+Code : 102                                                                      
+Name : Irfan Moin                                                               
+Date of joining : 12-5-2012                                                     
+                                                                                
+Code : 131                                                                      
+Name : Shabnam                                                                  
+Date of joining : 16-1-2014
+
+*/
+//write a program for next line
+#include<stdio.h>
+struct employee
+{
+int code;
+char name[30];
+int doj[3];
+}
+emp[5]= {
+
+001, "Shahnawaz", 13, 1,2006,
+004, "Amit Puri", 21, 6,2008,
+102, "Irfan Moin", 12, 5, 2012,
+131, "Shabnam", 16, 1, 2014
+};
+int main()
+{
+int i, d[3];
+scanf("%d%d%d", &d[0], &d[1], &d[2]);
+printf("\nEmployees with greater than or equal to 3 years of tenure\n\n");
+void printinfo( struct employee e);
+for (i = 0; i < 4; i++)
+{
+	if (d[2] - emp[i].doj[2] > 3)
+		printinfo(emp[i]);
+	else if (d[2] - emp[i].doj[2] == 3)
+	{
+		if (d[1] - emp[i].doj[1] > 0)
+			printinfo(emp[i]);
+		else if (emp[i].doj[1] == d[1])
+		{
+			if (d[0] - emp[i].doj[0] >= 0)
+				printinfo(emp[i]);
+
+		}
+	}
+}
+return 0;
+}
+
+void printinfo(struct employee e)
+{
+printf("\nCode : %d", e.code);
+printf("\nName : %s", e.name);
+printf("\nDate of joining : %d-%d-%d\n", e.doj[0], e.doj[1], e.doj[2]);
+}
+5.Comparision of two dates
+---------------------------------------------------------------------
+/* Write a function that compares two given dates. To store a date use a structure that contains three members namely day, month and
+year. If the dates are equal the function should return 0, otherwise it should return 1.
+Test cases:
+case=t1
+input=
+25-12-2013
+25-12-2013
+output=
+The dates are same
+
+case=t2
+input=
+25-12-2013
+11-01-2018
+output=
+The dates are not same
+
+*/
+//write a program for next line
+#include<stdio.h>
+struct dmy
+{
+int date;
+int month;
+int year;
+};
+
+int datcmp(struct dmy a, struct dmy b)
+{
+if (a.date == b.date && a.month == b.month && a.year == b.year)
+	return 0;
+else
+	return 1;
+}
+
+int main()
+{
+struct dmy a, b;
+int flag;
+
+scanf("%d%d%d", &a.date, &a.month, &a.year);
+
+scanf("%d%d%d", &b.date, &b.month, &b.year);
+flag = datcmp(a, b);
+if (flag)
+	printf("The dates are not same\n");
+else
+	printf("The dates are same\n");
+return 0;
+}
+6. Most Valuable Player
+----------------------------------------------------------
+/* There are five players from which the Most Valuable Player (MVP) is to be chosen. Each player is to be judged by 3 judges, who would
+assign a rank to each player. The player whose sum of ranks is highest is chosen as MVP. Write a program to implement this scheme.
+Test cases:
+ase=t1
+input=
+10 25 30
+50 85 90
+100 90 80
+output=
+Player number 3 is choosen as MVP
+
+*/
+//write a program for next line
+-------------------------------------------------------------------
+#include<stdio.h>
+struct marks
+{
+int j[3];
+int tot;
+};
+
+	int main()
+{
+struct marks player[3];
+int i, j, max = 0,p=0;
+for (i = 0; i < 3; i++)
+{
+//	printf("Marks for player-%d", i + 1);
+	for (j = 0; j < 3; j++)
+	{
+		/*printf("\nEnter marks entered by judege number %d : ", j + 1);*/
+		scanf("%d", &player[i].j[j]);
+	}
+}	
+	for(i=0;i<3;i++)
+	{
+	   player[i].tot = player[i].j[0] + player[i].j[1] + player[i].j[2];
+	   //printf(" total of player %d is %d\n",i+1,player[i].tot);
+	   if (player[i].tot > max)
+	   {
+	      max = player[i].tot;
+	      p=i+1;
+	   }	  
+    }
+
+
+		printf("Player number %d is choosen as MVP\n", p);
+		return 0;
+	
+}
+7.Supermarket Grocery
+--------------------------------------------
+/* Given a enum with predefined values and nested structure with existing product details where product category is fetched from enum.
+Write a structure program to enter a existing product name as given in the structure below, and print the product category id.
+
+//note: use the structure and enum templates given below exactly as it is. There are 5 products and 5 categories in enum.
+
+Test cases:
+----------------------------------
+case=t1
+input=Peanuts
+output=Category ID: 104
+
+case=t2
+input=Lychee
+output=Category ID: 101
+
+case=t3
+input=Brocolli
+output=Category ID: 102
+
+case=t4
+fail message="hidden test case"
+input=bread
+output=Category ID: 103
+
+*/
+#include <stdio.h>
+#include<string.h>
+
+enum supermarket 
+{
+    Fruits=101, Vegetables, Dairy, Grocery, Beverages
+};
+
+struct Product 
+{
+    char name[50];
+    int price;
+    enum supermarket id;                            //concept of nested structure
+    
+} prod[5]={"bread", 50, Dairy,
+"Brocolli", 140, Vegetables,
+"Lychee", 70, Fruits,
+"Peanuts", 200, Grocery,
+"Limesoda", 20, Beverages};
+
+int main()
+{
+   
+    char productName[50];
+   // printf("Enter product name: ");
+    scanf("%s", productName);
+
+    int i;
+    int flag = 0;  
+
+    for (i = 0; i < 5; i++)
+    {
+        if (strcmp(productName, prod[i].name) == 0) 
+        {
+            flag = prod[i].id;
+            break;
+        }
+    }
+
+    if (flag != 0) 
+    {
+        printf("Category ID: %d\n", flag);
+    } else {
+        printf("Id not found\n");
+    }
+
+    return 0;
+}
+8.Addition of two complex no's by passing result from function as a structure with the help of pointers
+--------------------------------------------------------------------------------------------------------------
+/*Complex numbers adition through structurs,functions concept by returning a entair structure as return valu from function.
+Example test cases
+case=t1
+input=32.5                                                                            
+-23.5                                                                           
+38.565                                                                          
+-15.42                                                                          
+output=                                                                                
+result.real = 71.1                                                              
+result.imag = -38.9 
+
+case=t2
+input=-56.254                                                                         
+26.854                                                                          
+57.1562                                                                         
+39.54                                                                           
+output=                                                                                
+result.real = 0.9                                                               
+result.imag = 66.4 
+
+case=t3
+input=0.125                                                                           
+.654                                                                            
+1.25                                                                            
+.789                                                                            
+output=                                                                                
+result.real = 1.4                                                               
+result.imag = 1.4
+
+
+*/
+//write a program for next line
+#include <stdio.h>
+typedef struct Complex
+{
+    float real;
+    float imag;
+} complex;
+
+void addNumbers(complex c1, complex c2, complex *result); 
+
+int main()
+{
+    complex c1, c2, result;
+
+    //printf("For first number,\n");
+    //printf("Enter real part: ");
+    scanf("%f", &c1.real);
+    //printf("Enter imaginary part: ");
+    scanf("%f", &c1.imag);
+
+    //printf("For second number, \n");
+    //printf("Enter real part: ");
+    scanf("%f", &c2.real);
+    //printf("Enter imaginary part: ");
+    scanf("%f", &c2.imag);
+
+    addNumbers(c1, c2, &result); 
+    printf("\nresult.real = %.1f\n", result.real);
+    printf("result.imag = %.1f", result.imag);
+    
+    return 0;
+}
+void addNumbers(complex c1, complex c2, complex *result) 
+{
+     result->real = c1.real + c2.real;
+     result->imag = c1.imag + c2.imag; 
+}
+9.Enjoying the party and BILL Sharing
+--------------------------------------------------------------
+/*In a Party Environment After entering items,price and quantity we need to generate total bill by displaying all detais and 
+if required you need to share the bill among multiple peoples as per users intrest.(choice is enabled to add more items )
+Use 1 AND 0 to ask choice,if you enter 1 it should ask for next item details and 0 to proceed further.
+enter the input by seeing example test case reference.("don't display user messages like Enter item details [ 1]:                                                        
+                                                                                         Item?                                                         
+                                                                                         Price?                                                                       
+                                                                                         Quantity?  ")
+Test cases:  
+-----------------------------------------------------------------
+case=t1
+input=Prawns Biryani                                                           
+150                                                                      
+2                                                                    
+1                                                 
+coca cola                                                                
+20                                                                       
+1                                                                    
+0
+0
+output=
+All details are:                                                                
+Prawns Biryani                                                                  
+150.00            
+2                                            
+300.00                                                                         
+coca cola                                                                       
+20.00     
+1                                            
+20.00                                                                          
+#### Total expense: 320.00                                                      
+~Thanks for using me... Enjoy your party!!!~
+
+
+case=t2
+input=kaju burfi                                                           
+650                                                                      
+2                                                                    
+1                                                 
+masala samosa                                                                
+80                                                                       
+2                                                                   
+1
+milk shake
+60
+1
+0
+1
+2
+output=
+All details are:                                                                
+kaju burfi                                                           
+650.00                                                                      
+2                                            
+1300.00                                                                         
+masala samosa                                                                
+80.00                                                                       
+2                                            
+160.00 
+milk shake
+60.00
+1
+60.00
+#### Total expense: 1520.00
+Each friend will have to pay:760.00
+~Thanks for using me... Enjoy your party!!!~
+
+*/
+//write a program for next line
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 50 //maximum items entry
+
+// structure definition
+typedef struct item_details {
+    char itemName[30]; // item name
+    int quantity; // item quantity
+    float price; // per item price
+    float totalAmount; // total amount = quantity*price
+} item;
+
+int main()
+{
+    item thing[MAX]; // structure variable
+    int i, choice;
+    int count = 0;
+    float expenses = 0.0f;
+
+    i = 0;
+    // infinite loop
+    do {
+       
+           scanf("%[^\n]s",thing[i].itemName);
+           
+           scanf("%f",&thing[i].price);
+
+           scanf("%d",&thing[i].quantity);
+        thing[i].totalAmount = (float)thing[i].quantity * thing[i].price;
+        expenses += thing[i].totalAmount;
+        i++; // increase loop counter
+        count++; // increase record counter
+
+        //printf("\nWant to more items (press 1): ");
+        scanf("%d",&choice);
+        //printf("choice=%d",choice);
+        scanf("\n");
+        
+     
+    } while (choice == 1);
+     
+    // print all items
+    printf("All details are:\n");
+    for (i = 0; i < count; i++) {
+        printf("%s\n%.2f\n%d\n%.2f\n",thing[i].itemName, thing[i].price, thing[i].quantity, thing[i].totalAmount);
+    }
+    printf("#### Total expense: %.2f\n",expenses);
+
+    //printf("Want to divide in friends (press 1 for yes): ");
+    scanf("%d",&choice);
+    scanf("\n");
+    if (choice == 1) {
+      //  printf("How many friends? ");
+        scanf("%d",&i);
+        printf("Each friend will have to pay: %.2f\n",(expenses / (float)i));
+    }
+
+    printf("~Thanks for using me... Enjoy your party!!!~\n");
+    return 0;
+}
