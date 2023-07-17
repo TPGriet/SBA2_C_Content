@@ -1,0 +1,821 @@
+1.Numerical String
+------------------------------------------------------------------
+/* Define a function getint( ), which would receive a numeric string
+from the keyboard, convert it to an integer number and return the
+integer to the calling function. A sample usage of getint( ) is shown
+below.
+# include <stdio.h>
+int main( )
+{
+int a ;
+a = getint( ) ;
+printf ( "you entered %d\n", a ) ;
+return 0 ;
+}
+
+Testcases:
+---------------------------------------------
+case=t1
+input=
+12345
+output=
+you entered 12345
+
+case=t2
+input=
+000
+output=
+you entered 0
+
+case= t3
+input=
+569211548
+output=
+you entered 569211548
+
+*/
+//write a program from next line
+---------------------------------------------------------------
+# include <stdio.h>
+# include<stdlib.h>
+#include<string.h>
+
+int getint(char n[])
+{
+    return(atoi(n));
+}
+int main( )
+{
+    char num[15];
+    scanf("%s",num);
+    int a ;
+    a = getint(num ) ;
+    printf ( "you entered %d\n", a ) ;
+    return 0 ;
+}
+2. Circular Shift of values using pointer
+-----------------------------------------------------------------------------
+/* Given three variables a, b, c write a function to circularly shift their values to right. 
+In other words if a = 5, b = 8, c = 10, after circular shift b = 5, c = 8, a =10. 
+Call the function with variables a, b, c to circularly shift values.
+
+Testcases:
+----------------------------------------------------------------------------
+case=t1
+input=
+5 8 10
+output=
+After Shifting
+a : 10	b : 5  c : 8
+
+case=t2
+input=
+2 3 1
+output=
+After Shifting
+a : 1	b : 2  c : 3
+*/
+//write a program from next line
+# include<stdio.h>
+void circularshift(int *a, int *b, int *c)
+{
+   //write your code here
+   int  temp;
+   temp=*c;
+   *c=*b;
+    *b=*a;
+    *a=temp;
+}
+
+int main()
+{
+    //pass 3 variables to function
+    int a,b,c;
+    scanf("%d %d %d",&a,&b,&c);
+    circularshift(&a,&b,&c);
+    printf("a : %d  b : %d  c : %d",a,b,c);
+    return 0;
+}
+3. Find GCD (Euclidean Algorithm)
+------------------------------------------------------------------------
+/* Write a function to compute the greatest common divisor given by
+Euclid’s algorithm, exemplified for J = 1980, K = 1617 as follows:
+1980 / 1617 = 1   1980 – 1 * 1617 = 363
+1617 / 363 = 4    1617 – 4 * 363 = 165
+363 / 165 = 2     363 – 2 * 165 = 33
+5 / 33 = 5        165 – 5 * 33 = 0
+Thus, the greatest common divisor is 33.
+
+Testcases:
+-----------------------------------------------------------------------------
+case=t1
+case=t1
+input=
+1980 1617
+output=
+Greatest common divisor of the given numbers is:33
+
+case=t2
+input=
+15 20
+output=
+Greatest common divisor of the given numbers is:5
+
+case=t3
+input=
+100 200
+output=
+Greatest common divisor of the given numbers is:100
+case="fail message"
+input=
+4 0
+output=
+Greatest common divisor of the given numbers is:4
+*/
+//write a program from next line
+
+#include<stdio.h>
+ 
+int gcd(int x, int y)
+{
+    int r = 0, a, b;
+    if(y==0)
+    {
+        return(x);
+    }
+    a = (x > y) ? x : y; // a is greater number
+    b = (x < y) ? x : y; // b is smaller number
+ 
+    r = b;
+    while (a % b != 0)
+    {
+        r = a % b;
+        a = b;
+        b = r;
+    }
+    return r;
+}
+ 
+int main()
+{
+   // printf("Enter the two numbers: ");
+    int x, y;
+    scanf("%d", &x);
+    scanf("%d", &y);
+    printf("Greatest common divisor of the given numbers is: %d", gcd(x, y));
+    return 0;
+}
+4.John and factorial of number
+---------------------------------------------------------
+/* John is younger brother to smith. John finds difficulty in finding the factorial of a number and asked for help to 
+his elder brother smith. Smith thought of giving a solution to john in recursive manner. Smith is busy with his 
+personal work. Help the smith for finding a factorial of a number recursively.
+Fact(n) = 1 if n = = 0 or n== 1
+ = n x Fact(n-1) if n > 1
+
+Testcases:
+--------------------------------------------------------------------
+case=t1
+input=5
+output= Factorial of 5 is 120
+
+case=t2
+input=6
+output= Factorial of 6 is 720
+
+*/
+//write a program from next line
+#include<stdio.h>  
+  
+long factorial(int n)  
+{  
+  if (n == 0 || n==1)  
+    return 1;  
+  else  
+    return(n * factorial(n-1));  
+}  
+   
+int main()  
+{  
+  int number;  
+  long fact;  
+  scanf("%d", &number);   
+   
+  fact = factorial(number);  
+  printf("Factorial of %d is %ld\n", number, fact);  
+  return 0;  
+}  
+5. Super Digit
+-----------------------------------------------------------------------------------------------------------
+/* Recursive Digit Sum
+We define super digit of an integer x using the following rules:
+Given an integer, we need to find the super digit of the integer.
+If x has only 1 digit, then its super digit is x.
+Otherwise, the super digit of x is equal to the super digit of the sum of the digits of x.
+For example, the super digit of 9875 will be calculated as:
+Super_digit (9875) 9+8+7+5=29
+Super_digit (29) 2+9=11
+Super_digit (11) 1+1=2
+Super_digit (2) =2
+
+Testcases:
+-----------------------------------------------------------------------------
+case=t1
+input=1980 
+output=9
+
+case=t2
+input=98056 
+output=1
+
+case= t3
+Fail message="Hidden test case"
+input=52639
+output=7
+
+*/
+//write a program from next line
+
+# include <stdio.h>
+int sum (int a);
+ 
+int main()
+{
+    int num, result;
+ 
+   
+    scanf("%d", &num);
+    
+     result=sum(num);
+     
+        
+    printf("%d\n",result);
+    return 0;
+}
+ 
+int sum (int num)
+{
+    //return num%9 == 0 ? 9 : num % 9;
+     return num < 10 ? num : sum(num%10 + sum(num/10));
+}
+6.(Magic of Pointers and Functions) Analyzing the given value by its properties and signs.
+---------------------------------------------------------------------------------------------
+/* This function separates a number into three parts: a sign (+, -,
+or blank), a whole number magnitude and a fraction part.
+Preconditions: num is defined; signp, wholep and fracp contain
+ addresses of memory cells where results are to be
+stored
+ Postconditions: function results are stored in cells pointed to by
+ signp, wholep, and fracp
+
+Example Testcases:
+--------------------------------------------------------------------------------
+case=t1
+input= -23.4537
+output=
+Parts of -23.4537
+sign: -
+whole number magnitude: 23
+fractional part : 0.4537
+
+
+case=t2
+input=-32.58 
+output=
+Parts of -32.5800                                                               
+ sign: -                                                                        
+whole number magnitude: 32                                                      
+fractional part : 0.5800
+*/
+//write a program from next line
+#include<stdio.h>
+#include<math.h>
+void separate(double num, char *signp, int *wholep, double *fracp)
+{
+double magnitude;
+if (num < 0)
+*signp = '-';
+else if (num == 0)
+*signp = ' ';
+else
+*signp = '+';
+magnitude = fabs(num);
+*wholep = floor(magnitude);
+*fracp = magnitude - *wholep;
+}
+int main()
+{
+double value;
+char sn;
+int whl;
+double fr;
+/* Gets data */
+//printf("Enter a value to analyze:");
+scanf("%lf", &value);
+/* Separates data value in three parts */
+separate(value, &sn, &whl, &fr);
+/* Prints results */
+printf("Parts of %.4f\n sign: %c\n", value, sn);
+printf("whole number magnitude: %d\n", whl);
+printf("fractional part : %.4f\n", fr);
+return 0;
+}
+7.String copy using arrays and pointers
+----------------------------------------------------------------------------
+/* Copying a string using array notation and pointer notation.
+procedure:Take total four strings as (string1,string 2,string3,string4) assign sting values to 2nd and 4th string copy them to 1st and 3rd. 
+constraint string values should be non-volatile.
+Testcases:
+---------------------------------------------
+case=t1
+input=Hello
+Good Bye
+output=
+string1 = Hello
+string3 = Good Bye
+
+
+case=t2
+input=Who are you
+Please introduce yourself?
+output=
+string1 = Who are you
+string3 = Please introduce yourself?
+
+*/
+//write a program from next line
+---------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+void copy1( char *s1, char *s2 );
+void copy2( char *s1, char *s2 );
+int main()
+{
+char string1[ 25 ]; /* create array string1 */
+char *string2=(char*)malloc(25 * sizeof(char));/* create a pointer to a string */
+//fgets(string2,sizeof(string2),stdin);
+scanf("%[^\n]s", string2);
+scanf("\n");
+char string3[25]; /* create array string3 */
+char string4[25]; /* create a pointer to a string */
+
+scanf("%[^\n]s", string4);
+//fgets(string4,sizeof(string4),stdin);
+copy1( string1, string2 );
+printf( "string1 = %s\n", string1);
+copy2( string3, string4 );
+printf( "string3 = %s\n", string3);
+
+return 0;
+}
+//Example
+/* copy s2 to s1 using array notation */
+void copy1( char *s1, char *s2 )
+{
+int i;
+for ( i = 0; ( s1[ i ] = s2[ i ] ) != '\0'; i++ );
+} /* end function copy1 */
+/* copy s2 to s1 using pointer notation */
+void copy2( char *s1, char *s2 )
+{
+/* loop through strings */
+for ( ; ( *s1 = *s2 ) != '\0'; s1++, s2++ );
+} /* end function copy2 */
+8. Try to Print branch codes of Branch Sequences
+------------------------------------------------------------------------------------------------------
+/*A Business man initially having two offices ,now he wants to extend his business by opening new "n" number of offices.
+  He used a famous technique for extending his branches such as he will add all the proterties(total sum) of his immediate old two  branch to establish new branch inturn,
+  he got tramandous result where his brand became unique in chain of branches.
+  
+  Now our duity is to find and print branch numbers in sequence if he provides range of chain of branches(nth term). 
+
+Testcases:
+-------------------------------------------------------------
+ase=t1
+input=9                                                                               
+output=                                                                                
+BranchSequences:                                                                
+Branch1 code: 0                                                                 
+Branch2 code: 1                                                                 
+Branch3 code: 1                                                                 
+Branch4 code: 2                                                                 
+Branch5 code: 3                                                                 
+Branch6 code: 5                                                                 
+Branch7 code: 8                                                                 
+Branch8 code: 13                                                                
+Branch9 code: 21
+
+case=t2
+input=12                                                                              
+output=                                                                                
+BranchSequences:                                                                
+Branch1 code: 0                                                                 
+Branch2 code: 1                                                                 
+Branch3 code: 1                                                                 
+Branch4 code: 2                                                                 
+Branch5 code: 3                                                                 
+Branch6 code: 5                                                                 
+Branch7 code: 8                                                                 
+Branch8 code: 13                                                                
+Branch9 code: 21                                                                
+Branch10 code: 34                                                               
+Branch11 code: 55                                                               
+Branch12 code: 89
+*/
+//write a program from next line
+----------------------------------------------------------------------------
+#include<stdio.h>
+void branchSequences(int);  
+  
+int main()  
+{  
+    int n;  
+   // printf("How many number of series? :\n");  
+    scanf("%d", &n);  
+    // calling function
+    branchSequences(n);  
+    return 0;  
+}  
+  
+void branchSequences(int num)  
+{  
+    int n1 = 0, n2 = 1, n3, count;  
+  
+    printf("\nBranchSequences: \n");  
+    printf("Branch1 code: %d\nBranch2 code: %d\n", n1, n2);  
+  
+    for(count = 3; count <= num; count++)  
+    {  
+        n3 = n1 + n2;  
+        printf("Branch%d code: %d\n", count, n3);  
+        n1 = n2;  
+        n2 = n3;  
+    }  
+}  
+9.Testing Engine whether it is Perfect or Not
+---------------------------------------------------------------------
+/*Here the problem statement is given as ,
+  Speed of any engine say an Aeroplane engine is initially started with speed measure of 1
+  and gradually the speed id being increased randomly in air then at the time of landing the speed should be decreased gradually
+  if this process is going smoothly then it is said that "The Engine is Perfect" otherwise "The Engine is Not Perfect"
+ */
+//write a program from next line
+Testcases:
+----------------------------------------------------------------------------
+case=t1
+input=6
+1 5 5 5 4 2
+output=The Engine is Perfect
+
+case=t2
+input=8
+1 5 5 5 4 2 6 1
+output=The Engine is Not Perfect
+#include <stdio.h>
+//using namespace std;
+ 
+int checkUnimodal(int arr[], int n)
+{
+    // Cover first strictly increasing part
+    int i = 1;
+    while (arr[i] > arr[i - 1] && i < n)
+        ++i;
+ 
+    // Cover middle equal part
+    while (arr[i] == arr[i - 1] && i < n)
+        ++i;
+ 
+    // Cover last decreasing part
+    while (arr[i] < arr[i-1] && i < n)
+        ++i;
+ 
+    // Return true if we reached end.
+    return (i == n);
+}
+ 
+int main()
+{
+     int n ;
+     scanf("%d",&n);
+    int arr[n],i; //= { 1, 5, 5, 5, 4, 2 };
+    for(i=0;i<n;i++)
+         scanf("%d",&arr[i]);
+    if (checkUnimodal(arr, n))
+        //cout << "Yes" << endl;
+        printf("The Engine is Perfect");
+    else
+        //cout << "No" << endl;
+        printf("The Engine is Not Perfect");
+}
+10.Twin prime pairs (use functions)
+-------------------------------------------------------------------------------
+/*A twin prime is a pair of prime numbers representing the difference of two prime numbers always 2 and is therefore called a twin prime.
+  In simple words,if the difference between two prime numbers is 2 and there is exactly one composite number between them, 
+  then the number is called twin prime numbers.
+For example, (59, 61) and (71, 73) are twin prime pairs, and the difference between these numbers is 61 - 59 = 2, and 73 - 71 = 2.
+Standard conditions:
+1. (2, 3) are not considered twin primes because there is no composite number between them, and neither is the difference of two prime numbers (2, 3) is equal to 2.
+2. (3, 5) is a pair of twin primes because the difference of two primes (5 - 3 = 2) is 2 and hence (3, 5) is a twin prime.
+3. Every twin other than (3, 5) is in the form of a prime number (6n - 1, 6n + 1), where n defines the natural number.
+4. 5 is the only prime number in which the difference between both positive and negative primes is 5. So, 5 appears in two prime pairs (3, 5) and (5, 7).
+5. If we add two pairs of twin prime numbers, the result of twin primes will be divisible by 12, except for (3, 5) pairs of twin prime numbers.
+
+test cases:
+------------------------------------------------------------------------------
+case=t1
+input=100
+output=
+(3, 5)
+(5, 7)
+(11, 13)
+(17, 19)
+(29, 31)
+(41, 43)
+(59, 61)
+(71, 73)
+Total number of twin prime pairs: 8
+ */
+//write a program from next line
+#include <stdio.h>  
+//#include <conio.h>
+int twinprime(int);
+int main ()  
+{  
+    // declare variables  
+    int i, num, count = 0;  
+    //printf (" Enter the last number: ");  
+    scanf (" %d", &num); // get the last number  
+      
+    for (i = 2; i <= num; i++)  
+    {  
+        if (twinprime (i) && twinprime (i+2))  
+        {  
+            printf (" \n (%d, %d) ", i, i+2);  
+            count++; // counter increment by 1  
+        }  
+    }  
+    printf (" \n \n Total number of twin prime pairs: %d", count);  
+    return 0;  
+}  
+// function definition   
+int twinprime( int n)  
+{  
+    int i = 2;  
+    // use for loop to find the twin prime  
+    for (i = 2; i <= n/2; i++)  
+    {  
+        // if n is completely divisible by 1 without leaving any remainder, it returns 0  
+        if (n%i == 0)  
+            return 0;  
+    }  
+    // otherwise it returns 1  
+    if (i > n / 2)  
+        return 1;  
+}  
+11. Ram and multiplication of number without operator and loop
+----------------------------------------------------------------------------------------
+/*Ram is a math whiz. He challenged his friend to come up with a solution to a problem.
+His friend requires the multiplication of two integers without the use of a multiplication operator or loops.
+
+
+Testcases:
+------------------------------------------------------------
+case=t1
+input=2 6
+output=2*6=12
+
+case=t2
+fail message= " Hiden test case , a two digit number"
+input=50 0
+output= 50*0=0 
+
+
+case=t3
+input=6 25
+output= 6*25=150
+*/
+//write a program from next line
+#include<stdio.h>
+int multiply( int A, int B)
+{
+   if( A < B ) {
+      return multiply( B, A );
+   }
+   else if( B != 0 ) {
+      return A + multiply( A, B - 1 );
+   }
+   else {
+      return 0;
+   }
+}
+int main()
+{
+    int a,b,c;
+    scanf("%d%d",&a,&b);
+    c=multiply(a,b);
+    printf("%d*%d=%d",a,b,c);
+}
+12.Pizza with alphabets
+------------------------------------------------
+/* In Pizza Hut all the varieties of pizza names are displayed in combination of both the upper case letters and the 
+lower case letters. In the similar way a program is to be developed which count total number of uppercase letters 
+available in a string using recursion.
+
+Test Cases:
+case=t1
+input=chicKen DominaTor 
+output=3
+
+case=t2
+input= TanGy PaNeeR
+output=5
+
+case=t3
+input= peppy paneer
+output=No uppercase letter
+
+*/
+//write a program from next line
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int countUpper(char str[])
+{  int c=0;
+    for (int i = 0; i < strlen(str); i++)
+        if (isupper(str[i]))
+            c++;
+    return c;
+}
+ 
+// Driver code
+int main()
+{
+    char str[30];
+    scanf("%[^\n]s",str);
+    int res=countUpper(str);
+    if (res == 0)
+        printf("No uppercase letter");
+    else
+        printf("%d",res);
+    return 0;
+}
+13. x raised to the power n
+-------------------------------------------------
+/*Implement pow(x, n), which calculates x raised to the power n.
+Testcases:
+-------------------------------------
+case=t1
+input=2.00000 10
+output=1024.00000
+
+case=t2
+input=2.10000 3
+output=9.261000
+
+case=t3
+input= 20.00 0
+output=1.000000
+
+*/
+//write a program from next line
+#include<stdio.h>
+float power(float base, int a)
+{
+    if (a != 0)
+        return (base * power(base, a - 1));
+    else
+        return 1;
+}
+int main()
+{
+    float x,res;
+    int n;
+    scanf("%f%d",&x,&n);
+    res=power(x,n);
+    printf("%f",res);
+}
+14. Jump Game
+----------------------------------------------------------------
+/*You are given an integer array nums. You are initially positioned at the array's first index, 
+and each element in the array represents your maximum jump length at that position.
+Return true if you can reach the last index, or false otherwise.
+
+Input: nums = [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+Example 2:
+Input: nums = [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+ Testcases:
+ ---------------------------------------------------------------------
+ case=t1
+input=2.00000 10
+output=1024.00000
+
+case=t2
+input=2.10000 3
+output=9.261000
+
+case=t3
+input= 20.00 0
+output=1.000000
+
+*/
+//write a program from next line
+--------------------------------------------------------------
+#include<stdio.h>
+double power(double x,int n)
+{
+    if(n==0){
+        return 1;
+    }
+    else if(n>0){
+        double result=x;
+        int i;
+        for(i=1;i<n;i++){
+            result*=x;
+        }
+        return result;
+    }
+    else{
+        double result=1.0/x;
+        int i;
+        for(i=1;i<-n;i++){
+            result/=x;
+        }
+        return result;
+    }
+}
+int main()
+{
+    double x;
+    int n;
+    scanf("%lf",&x);
+    scanf("%d",&n);
+    double result=power(x,n);
+    printf("%.6f",result);
+    return 0;
+}
+15.Cipher Text
+-----------------------------------------------------------------------
+/*If the string length is more than 100 characters print error message as follows:
+"string length exceeds 100 chracters"
+
+Test case example:
+--------------------------------------------------------------------------
+case=t1
+input=ARSENAL
+output=BSTFOBM
+
+case=t2
+input=GRIET COLLEGE
+output=HSJFU!DPMMFHF
+
+case=t3
+Fail message="string is a number: for example: 123 should be 234"
+input=12345
+output=23456
+
+case=t4
+input=ergerg erg erg rg erg erg erg reg erg reg er ger g rth rth rtgh rtg  erfg erge rge rg erg erg ergrekgerkgkergkefvkerg ergerg ergkerkg regkerg
+output=string length exceeds 100 chracters
+
+
+
+
+*/
+//write a program from next line
+
+#include <stdio.h>
+#include<string.h>
+void nextchar(char *);
+
+int main() 
+{
+     char string[200];
+     fgets(string,sizeof(string),stdin);
+    
+     int length=strlen(string);
+     
+     if(length>100)
+    {
+      printf("string length exceeds 100 chracters");
+      return 0;
+    }
+
+    nextchar(string);
+    printf("%s", string);
+    return 0;
+}
+
+void nextchar(char *a) 
+{
+    while (*a != '\0')
+    {
+        *a += 1;
+        a++;
+    }
+}
